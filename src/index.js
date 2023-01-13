@@ -26,22 +26,20 @@ module.exports = function toReadable (number) {
       60: 'sixty',
       70: 'seventy',
       80: 'eighty',
-      90: 'ninety'}
+      90: 'ninety'
+    }
     let res = '';
     if (!number) {
       return 'zero';
     }
-    let x = Math.floor(number / 100);
-    if (x) {
-      res += numbers[x] + ' hundred ';
+    if (number >= 100) {
+      res += numbers[Math.floor(number / 100)] + ' hundred ';
       number = number % 100;
     }
     if (numbers[number]) {
       res += numbers[number];
     } else if (number) {
-      x = number % 10;
-      res += numbers[number - x] + ' ';
-      res += numbers[x];
+      res += numbers[number - number % 10] + ' ' + numbers[number % 10];
     }
     return res.trim();
 }
