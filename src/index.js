@@ -1,5 +1,6 @@
 module.exports = function toReadable (number) {
   let numbers = {
+    0: 'zero',
     1: 'one',
     2: 'two',
     3: 'three',
@@ -28,20 +29,15 @@ module.exports = function toReadable (number) {
     80: 'eighty',
     90: 'ninety'}
   let res = '';
-  if (!number) {
-    return 'zero';
+  if (numbers[number]) {
+    return numbers[number];
   }
-  if (number >= 100) {
+  if (number > 99) {
     res += numbers[Math.floor(number / 100)] + ' hundred ';
     number %= 100;
   }
   if (number) {
-    if (numbers[number]) {
-      res += numbers[number];
-    } else {
-      let x = number % 10;
-      res += numbers[number - x] + ' ' + numbers[x];
-    }
-  }
+    numbers[number] ? res += numbers[number] : res += numbers[number - number % 10] + ' ' + numbers[number % 10];
+   }
   return res.trim();
 }
