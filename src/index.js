@@ -34,7 +34,7 @@ module.exports = function toReadable (number) {
     }
     if (number >= 100) {
       res += numbers[Math.floor(number / 100)] + ' hundred ';
-      number = number % 100;
+      number %= 100;
     }
     if (numbers[number]) {
       res += numbers[number];
